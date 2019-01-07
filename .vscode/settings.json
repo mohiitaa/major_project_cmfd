@@ -1,0 +1,6 @@
+{
+    "less.colorDecorators.enable": false,
+    "python.linting.enabled": true,
+    "git.ignoreLimitWarning": true
+}
+

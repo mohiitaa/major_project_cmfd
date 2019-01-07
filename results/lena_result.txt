@@ -1,0 +1,5 @@
+Image not tampered.
+
+Size of the image (rows, cols): 512,512
+
+Time elapsed: 0.4784979820251465

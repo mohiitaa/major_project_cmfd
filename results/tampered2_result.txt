@@ -1,0 +1,21 @@
+Tampering Detected.
+
+Size of the image (rows, cols): 492,737
+
+Time elapsed: 7.556370973587036
+
+Homography matrix is:
+
+matrix([[ 0.57654709, -0.20847121, -0.12694513],
+        [ 0.26009273,  0.84692016,  1.77687416],
+        [ 0.25920016,  0.27522359,  1.        ]])
+
+Affine Transformation:
+
+matrix([[ 0.57654709, -0.20847121],
+        [ 0.26009273,  0.84692016]])
+
+Translation:
+
+matrix([[-0.12694513],
+        [ 1.77687416]])
