@@ -155,43 +155,71 @@ def match_features(*argv):
     des1_row, des1_col = des1.shape[:2]
 
     print "des1_row = ", des1_row
-    if (des1_row <15000):
-        des1_mult = np.matmul(des1,des1.transpose())
-        temp_2 = np.asmatrix(np.sqrt(des1_mult.diagonal()))
+    print "des1_col = ", des1_col
+    # if (des1_row <15000):
+    # # if(1):
+    #     des1_mult = np.matmul(des1,des1.transpose())
+    #     temp_2 = np.asmatrix(np.sqrt(des1_mult.diagonal()))
 
-        des1 = np.divide(des1, np.matlib.repmat(temp_2.transpose(),1,des1_col))
-        # print len(des1)
+    #     des1 = np.divide(des1, np.matlib.repmat(temp_2.transpose(),1,des1_col))
+    #     print "\ndes1 is:", des1[1,:]
+    #     # print len(des1)
+    # # des1_mult = np.matmul(des1,des1.transpose())
+    # # temp_2 = np.asmatrix(np.sqrt(des1_mult.diagonal()))
+
+    # # des1 = np.divide(des1, np.matlib.repmat(temp_2.transpose(),1,des1_col))
+    
+    # else:
+    #     des1_norm = des1 
+    #     print "Hey I am in else"
+    #     # for j in range(1,des1_col):
+    #     for j in range(0,des1_col):
+    #         # des1_j = des1_norm(j,:)  ### WHAT???
+    #         des1_j = des1_norm[j,:]
+    #         des1_norm[j,:] = np.divide(des1_j,LA.norm(des1_j))
+            
+    #         if j == 1:
+    #             print "Normalised value is:", des1_norm[j,:]
+        
+    #     des1 = copy.deepcopy(des1_norm)
+        
+    
+    # if(1):
     # des1_mult = np.matmul(des1,des1.transpose())
     # temp_2 = np.asmatrix(np.sqrt(des1_mult.diagonal()))
 
     # des1 = np.divide(des1, np.matlib.repmat(temp_2.transpose(),1,des1_col))
+    # print "\ndes1 is:", des1[1,:]
+        # print len(des1)
+    des1_mult = np.matmul(des1,des1.transpose())
+    temp_2 = np.asmatrix(np.sqrt(des1_mult.diagonal()))
+
+    des1 = np.divide(des1, np.matlib.repmat(temp_2.transpose(),1,des1_col))
     
-    else:
-        des1_norm = des1 
-        print "Hey I am in else"
-        # for j in range(1,des1_col):
-        for j in range(0,des1_col):
-            # des1_j = des1_norm(j,:)  ### WHAT???
-            des1_j = des1_norm[j,:]
-            des1_norm[j,:] = np.divide(des1_j,LA.norm(des1_j))
-            
-            if j == 2832:
-                print "Normalised value is:", des1_norm[j,:]
-        
-        # des1 = des1_norm
-        
+    
     des1= np.asmatrix(des1)
     # print des1.shape
     #sift matching
     des2t = des1.transpose()
+    print "\n size of des1: ", des1.shape
+    print "\n size of des2t: ", des2t.shape
+    print "\n first element of des1:", des1[0,0]
+    print "\n first element of des1:", des2t[0,0]
+    
+
+
     match=np.zeros((1,des1_row))
     count = 0
     # precompute matrix transpose
     if (des1_row > 1): #start the matching procedure iff there are at least 2 points
         for i in range(0,des1_row):#MATLAB Array indexing starts with 1, Compensating
+            if i == 1:
+                print "\ndes1 before printing Dotprods", des1[1,:]
+                print "\ndes2t", des2t
             dotprods = np.matmul(des1[i,:],des2t)     #Computes vector of dot products #### CHECK THIS ONCE
  ### This abovr takes the cross correlation between descriptors of keypoint
- 
+            # print "\n size of  dotprods ",  dotprods.shape
+            # dotprods = np.divide(dotprods,LA.norm(dotprods)) # remove this later
  
  ###########  24 Oct 2018 ##############
             #vals,indx = sort(np.arccos(dotprods))  #Take inverse cosine and sort results  ### Don't know val index returning sort function
@@ -208,7 +236,7 @@ def match_features(*argv):
             # while vals[j]<dr2* vals[j+1]: 
             # print vals.shape
             if (i == 2832):
-                print "vals for i", i, 'is', vals
+                print "vals for i", i, 'is', vals # value is nan for number of rows > 15000
             # vals = np.array(vals)
             while (vals[0,j]<dr2*vals[0,j+1]): 
                 j = j+1
